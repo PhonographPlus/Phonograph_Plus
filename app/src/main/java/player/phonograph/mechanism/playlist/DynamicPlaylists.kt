@@ -1,10 +1,12 @@
 /*
- *  Copyright (c) 2022~2024 chr_56
+ *  Copyright (c) 2022~2026 chr_56
  */
 
-package player.phonograph.model.playlist
+package player.phonograph.mechanism.playlist
 
 import player.phonograph.R
+import player.phonograph.model.playlist.Playlist
+import player.phonograph.model.playlist.VirtualPlaylistLocation
 import android.content.res.Resources
 
 object DynamicPlaylists {

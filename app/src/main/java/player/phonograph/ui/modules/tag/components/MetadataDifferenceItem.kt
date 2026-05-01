@@ -7,6 +7,7 @@ package player.phonograph.ui.modules.tag.components
 import player.phonograph.R
 import player.phonograph.model.metadata.EditAction
 import player.phonograph.ui.compose.components.Title
+import player.phonograph.ui.resource.Texts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -15,8 +16,10 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowDropDown
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 
@@ -24,7 +27,8 @@ import androidx.compose.ui.unit.dp
 @Composable
 fun MetadataDifferenceItem(action: EditAction, old: String?) {
     Column(Modifier.padding(vertical = 16.dp)) {
-        val text = if (action.key.res > 0) stringResource(action.key.res) else action.key.name
+        val resources = LocalResources.current
+        val text = remember(action.key) { Texts.metadataTagKey(resources, action.key) }
         Title(text, horizontalPadding = 0.dp)
         NullableText(old)
         Icon(Icons.Outlined.ArrowDropDown, contentDescription = null)

@@ -8,6 +8,7 @@ import coil.request.Disposable
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView
 import player.phonograph.coil.palette.PaletteColorViewTarget
 import player.phonograph.model.ui.ItemLayoutStyle
+import player.phonograph.ui.resource.Layouts
 import player.phonograph.util.theme.secondaryTextColorOn
 import player.phonograph.util.theme.textColorOn
 import player.phonograph.util.theme.themeFooterColor
@@ -53,7 +54,8 @@ open class DisplayAdapter<I>(
 
     override fun getItemViewType(position: Int): Int = presenter.layoutStyle.ordinal
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayViewHolder<I> {
-        val view = LayoutInflater.from(activity).inflate(ItemLayoutStyle.from(viewType).layout(), parent, false)
+        val itemLayout = Layouts.itemLayoutStyle(ItemLayoutStyle.from(viewType))
+        val view = LayoutInflater.from(activity).inflate(itemLayout, parent, false)
         return DisplayViewHolder(view)
     }
 

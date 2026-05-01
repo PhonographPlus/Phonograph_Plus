@@ -19,6 +19,7 @@ import player.phonograph.service.MusicPlayerRemote
 import player.phonograph.settings.Keys
 import player.phonograph.settings.Setting
 import player.phonograph.ui.modules.player.LyricsViewModel
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.component.MusicProgressUpdateDelegate
 import player.phonograph.util.observe
 import player.phonograph.util.text.lyricsTimestamp
@@ -131,7 +132,7 @@ class LyricsDialog : DialogFragment() {
         for ((index, lyrics) in info.withIndex()) {
             val requireCheck = info.isActive(index)
             val chip = createChip(
-                lyrics.source.name(requireContext()), index, requireCheck, 0, this::onChipClicked
+                Texts.lyricsSource(resources, lyrics.source), index, requireCheck, 0, this::onChipClicked
             )
             binding.types.addView(chip)
             if (requireCheck) chipSelected = chip

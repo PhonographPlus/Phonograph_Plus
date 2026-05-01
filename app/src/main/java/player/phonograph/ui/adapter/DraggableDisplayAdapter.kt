@@ -10,6 +10,7 @@ import com.h6ah4i.android.widget.advrecyclerview.draggable.DraggableItemViewHold
 import com.h6ah4i.android.widget.advrecyclerview.draggable.ItemDraggableRange
 import com.h6ah4i.android.widget.advrecyclerview.draggable.annotation.DraggableItemStateFlags
 import player.phonograph.model.ui.ItemLayoutStyle
+import player.phonograph.ui.resource.Layouts
 import player.phonograph.util.ui.hitTest
 import androidx.fragment.app.FragmentActivity
 import android.view.LayoutInflater
@@ -56,7 +57,8 @@ abstract class DraggableDisplayAdapter<I>(
 
     override fun getItemViewType(position: Int): Int = presenter.layoutStyle.ordinal
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayViewHolder<I> {
-        val view = LayoutInflater.from(activity).inflate(ItemLayoutStyle.from(viewType).layout(), parent, false)
+        val itemLayout = Layouts.itemLayoutStyle(ItemLayoutStyle.from(viewType))
+        val view = LayoutInflater.from(activity).inflate(itemLayout, parent, false)
         return DraggableViewHolder(view)
     }
 

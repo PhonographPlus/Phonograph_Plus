@@ -4,9 +4,9 @@
 
 package player.phonograph.ui.dialogs
 
-import player.phonograph.mechanism.backup.Backup
 import player.phonograph.model.backup.BackupItem
 import player.phonograph.ui.adapter.SortableListAdapter
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.theme.textColorPrimary
 import androidx.appcompat.widget.AppCompatTextView
 import android.view.Gravity
@@ -39,7 +39,7 @@ class BackupChooserAdapter(
     override fun onBindContentView(contentView: View, holder: ViewHolder) {
         require(contentView is TextView) { "Receive ${contentView.javaClass.name}" }
         val item: BackupItem = dataset.items[holder.bindingAdapterPosition].content
-        contentView.text = Backup.displayName(item, contentView.resources)
+        contentView.text =Texts.backupItem(contentView.resources, item)
     }
 
     val currentConfig: List<BackupItem>

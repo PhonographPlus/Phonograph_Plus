@@ -5,13 +5,14 @@
 package player.phonograph.ui.modules.setting
 
 import player.phonograph.R
-import player.phonograph.model.time.displayText
+import player.phonograph.model.time.TimeIntervalCalculationMode
 import player.phonograph.settings.Keys
 import player.phonograph.settings.Setting
 import player.phonograph.ui.modules.setting.components.BooleanPreference
 import player.phonograph.ui.modules.setting.components.DialogPreference
 import player.phonograph.ui.modules.setting.components.SettingsGroup
 import player.phonograph.ui.modules.setting.dialog.CheckUpdateIntervalDialog
+import player.phonograph.ui.resource.Texts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -44,12 +45,7 @@ fun PreferenceScreenUpdates() {
                     val resources = it.resources
                     val preference = Setting(it)[Keys.checkUpdateInterval]
                     val duration = preference.data
-                    resources.getString(
-                        R.string.time_interval_text,
-                        resources.getString(R.string.interval_every),
-                        duration.value,
-                        duration.unit.displayText(resources)
-                    )
+                    Texts.duration(resources, duration, TimeIntervalCalculationMode.EVERY)
                 }
             )
         }

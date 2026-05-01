@@ -4,43 +4,28 @@
 
 package player.phonograph.model.pages
 
-import player.phonograph.R
-import android.content.Context
+import androidx.annotation.StringDef
 
-object Pages {
-    const val EMPTY = "EMPTY"
-    const val SONG = "SONG"
-    const val ALBUM = "ALBUM"
-    const val ARTIST = "ARTIST"
-    const val PLAYLIST = "PLAYLIST"
-    const val GENRE = "GENRE"
-    const val FOLDER = "FOLDER"
-    const val FILES = "FILES"
+const val PAGE_EMPTY = "EMPTY"
+const val PAGE_SONG = "SONG"
+const val PAGE_ALBUM = "ALBUM"
+const val PAGE_ARTIST = "ARTIST"
+const val PAGE_PLAYLIST = "PLAYLIST"
+const val PAGE_GENRE = "GENRE"
+const val PAGE_FOLDER = "FOLDER"
+const val PAGE_FILES = "FILES"
 
-    fun getDisplayName(pager: String?, context: Context): String {
-        return when (pager) {
-            SONG     -> context.getString(R.string.label_songs)
-            ALBUM    -> context.getString(R.string.label_albums)
-            ARTIST   -> context.getString(R.string.label_artists)
-            PLAYLIST -> context.getString(R.string.label_playlists)
-            GENRE    -> context.getString(R.string.label_genres)
-            FOLDER   -> context.getString(R.string.label_folders)
-            FILES    -> context.getString(R.string.label_files)
-            EMPTY    -> context.getString(R.string.msg_empty)
-            else     -> "UNKNOWN"
-        }
-    }
-
-    fun getTintedIconRes(pager: String?): Int {
-        return when (pager) {
-            SONG     -> R.drawable.ic_music_note_white_24dp
-            ALBUM    -> R.drawable.ic_album_white_24dp
-            ARTIST   -> R.drawable.ic_person_white_24dp
-            PLAYLIST -> R.drawable.ic_queue_music_white_24dp
-            GENRE    -> R.drawable.ic_bookmark_music_white_24dp
-            FOLDER   -> R.drawable.ic_folder_white_24dp
-            FILES    -> R.drawable.ic_folder_white_24dp
-            else     -> R.drawable.ic_library_music_white_24dp
-        }
-    }
-}
+@StringDef(
+    value = [
+        PAGE_EMPTY,
+        PAGE_SONG,
+        PAGE_ALBUM,
+        PAGE_ARTIST,
+        PAGE_PLAYLIST,
+        PAGE_GENRE,
+        PAGE_FOLDER,
+        PAGE_FILES,
+    ],
+)
+@Retention(AnnotationRetention.SOURCE)
+annotation class HomePage

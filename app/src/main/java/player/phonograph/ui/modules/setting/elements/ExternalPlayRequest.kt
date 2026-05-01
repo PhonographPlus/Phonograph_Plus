@@ -8,6 +8,7 @@ import player.phonograph.R
 import player.phonograph.model.SongClickMode
 import player.phonograph.ui.compose.components.CheckBoxItem
 import player.phonograph.ui.compose.components.ModeRadioBox
+import player.phonograph.ui.resource.Texts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -48,7 +49,7 @@ fun ExternalPlayRequestSettings(
         for (id in SongClickMode.singleItemModes) {
             ModeRadioBox(
                 mode = id,
-                name = SongClickMode.modeName(LocalResources.current, id),
+                name = Texts.songClickMode(LocalResources.current, id),
                 selectedMode = currentModeSingle,
                 setCurrentMode = setCurrentModeSingle,
                 enabled = !showPrompt,
@@ -62,7 +63,7 @@ fun ExternalPlayRequestSettings(
         for (id in SongClickMode.multipleItemsModes) {
             ModeRadioBox(
                 mode = id,
-                name = SongClickMode.modeName(LocalResources.current, id),
+                name = Texts.songClickMode(LocalResources.current, id),
                 selectedMode = currentModeMultiple,
                 setCurrentMode = setCurrentModeMultiple,
                 enabled = !showPrompt,

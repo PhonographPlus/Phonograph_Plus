@@ -4,12 +4,11 @@
 
 package player.phonograph.ui.modules.setting.elements
 
-import player.phonograph.R
 import player.phonograph.model.time.Duration
 import player.phonograph.model.time.TimeIntervalCalculationMode
 import player.phonograph.model.time.TimeUnit
-import player.phonograph.model.time.displayText
 import player.phonograph.ui.compose.components.WheelPicker
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.time.TimeInterval
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -140,7 +139,7 @@ fun IntervalPicker(
     ) {
         if (selectedMode != null && supportedMode.isNotEmpty() && onChangeMode != null) {
             WheelPicker(
-                items = supportedMode.map { it.displayText(resources) },
+                items = supportedMode.map { Texts.timeIntervalCalculationMode(resources, it) },
                 initialIndex = supportedMode.indexOf(selectedMode),
                 modifier = Modifier
                     .weight(5f)
@@ -161,8 +160,9 @@ fun IntervalPicker(
             onChangeDuration(Duration.of(supportedDurationValue[it].toLong(), currentUnit))
         }
 
+
         WheelPicker(
-            items = supportedDurationTimeUnits.map { it.displayText(resources) },
+            items = supportedDurationTimeUnits.map { Texts.timeUnit(resources, it) },
             initialIndex = supportedDurationTimeUnits.indexOf(selectedDuration.unit),
             modifier = Modifier
                 .weight(6f)
@@ -196,10 +196,11 @@ private fun previewText(
     val timestamp = System.currentTimeMillis() - when (calculationMode) {
         TimeIntervalCalculationMode.PAST   -> TimeInterval.past(duration)
         TimeIntervalCalculationMode.RECENT -> TimeInterval.recently(duration)
+        TimeIntervalCalculationMode.EVERY  -> 0
     }
     val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     val timeText = formatter.format(timestamp)
-    val durationText = duration.displayText(resources, calculationMode.displayText(resources))
+    val durationText = Texts.duration(resources, duration, calculationMode)
     return resources.getString(text, timeText, durationText)
 }
 
@@ -211,7 +212,7 @@ private fun previewText(
     val timestamp = System.currentTimeMillis() + duration.toSeconds() * 1000
     val formatter = SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault())
     val timeText = formatter.format(timestamp)
-    val durationText = duration.displayText(resources, resources.getString(R.string.interval_every))
+    val durationText = Texts.duration(resources, duration, TimeIntervalCalculationMode.EVERY)
     return resources.getString(text, timeText, durationText)
 }
 

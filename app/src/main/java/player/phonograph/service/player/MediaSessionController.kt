@@ -20,6 +20,8 @@ import player.phonograph.service.queue.QueueManager
 import player.phonograph.service.util.MediaButtonIntentReceiver
 import player.phonograph.settings.Keys
 import player.phonograph.settings.SettingObserver
+import player.phonograph.ui.resource.Icons
+import player.phonograph.ui.resource.Texts
 import android.app.PendingIntent
 import android.content.ComponentName
 import android.content.Intent
@@ -219,9 +221,9 @@ class MediaSessionController : ServiceComponent {
             PlaybackStateCompat.Builder {
         for (action in customActions) {
             addCustomAction(
-                action.action,
-                musicService.getString(action.stringRes),
-                action.icon(status)
+                action.command,
+                Texts.notificationAction(musicService.resources, action),
+                Icons.notificationAction(action, status)
             )
         }
         return this
@@ -230,7 +232,7 @@ class MediaSessionController : ServiceComponent {
     private var customActions: List<NotificationAction> = emptyList()
     private fun updateCustomActions(config: NotificationActionsConfig) {
         customActions = config.actions.sortedBy { it.displayInCompat }.map { it.notificationAction }
-            .filterNot { it in NotificationAction.COMMON_ACTIONS }
+            .filterNot { it in NotificationAction.COMMON }
     }
 
     @Suppress("SameParameterValue")

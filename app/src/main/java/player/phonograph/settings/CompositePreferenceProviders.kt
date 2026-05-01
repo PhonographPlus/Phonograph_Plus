@@ -234,6 +234,7 @@ object LastAddedCutOffDurationPreferenceProvider : ReadOnlyPreferenceProvider<Lo
                 System.currentTimeMillis() - when (calculationMode) {
                     TimeIntervalCalculationMode.PAST -> TimeInterval.past(lastAddedDuration)
                     TimeIntervalCalculationMode.RECENT -> TimeInterval.recently(lastAddedDuration)
+                    TimeIntervalCalculationMode.EVERY -> 0
                 }
             } else {
                 System.currentTimeMillis()

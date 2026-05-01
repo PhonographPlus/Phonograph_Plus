@@ -9,12 +9,12 @@ import player.phonograph.R
 import player.phonograph.foundation.compat.MediaStoreCompat
 import player.phonograph.mechanism.PhonographShortcutManager
 import player.phonograph.mechanism.SongUriParsers
+import player.phonograph.mechanism.playlist.DynamicPlaylists
 import player.phonograph.mechanism.playlist.PlaylistSongsActions
 import player.phonograph.model.PlayRequest
 import player.phonograph.model.PlayRequest.SongRequest
 import player.phonograph.model.PlayRequest.SongsRequest
 import player.phonograph.model.Song
-import player.phonograph.model.playlist.DynamicPlaylists
 import player.phonograph.model.playlist.Playlist
 import player.phonograph.model.service.ACTION_PLAY
 import player.phonograph.model.service.ShuffleMode

@@ -4,7 +4,6 @@
 
 package player.phonograph.model.playlist
 
-import player.phonograph.R
 import android.os.Parcelable
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
@@ -16,7 +15,7 @@ data class Playlist(
     @JvmField val dateAdded: Long = -1,
     @JvmField val dateModified: Long = -1,
     @JvmField val size: Int = -1,
-    @JvmField val iconRes: Int = R.drawable.ic_file_music_white_24dp,
+    @JvmField val iconRes: Int = -1,
 ) : Parcelable {
 
     @IgnoredOnParcel

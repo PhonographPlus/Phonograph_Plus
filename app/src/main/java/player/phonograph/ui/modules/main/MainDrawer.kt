@@ -11,7 +11,6 @@ import player.phonograph.ACTUAL_PACKAGE_NAME
 import player.phonograph.R
 import player.phonograph.foundation.Reboot
 import player.phonograph.foundation.error.warning
-import player.phonograph.model.pages.Pages
 import player.phonograph.model.pages.PagesConfig
 import player.phonograph.model.service.ACTION_EXIT_OR_STOP
 import player.phonograph.model.service.ShuffleMode
@@ -29,6 +28,8 @@ import player.phonograph.ui.dialogs.ScanMediaDialog
 import player.phonograph.ui.modules.auxiliary.AboutActivity
 import player.phonograph.ui.modules.setting.SettingsActivity
 import player.phonograph.ui.modules.web.WebSearchLauncher
+import player.phonograph.ui.resource.Icons
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.concurrent.runOnMainHandler
 import player.phonograph.util.permissions.navigateToAppDetailSetting
 import player.phonograph.util.permissions.navigateToStorageSetting
@@ -71,8 +72,8 @@ fun setupDrawerMenu(
             for ((page, tab) in pagesConfig.withIndex()) {
                 menuItem {
                     groupId = mainGroupId
-                    icon = getTintedDrawable(Pages.getTintedIconRes(tab), textColorPrimary)
-                    title = Pages.getDisplayName(tab, activity)
+                    icon = getTintedDrawable(Icons.page(tab), textColorPrimary)
+                    title = Texts.page(activity.resources, tab)
                     itemId = 1000 + page
                     onClick {
                         closeDrawer()

@@ -4,7 +4,6 @@
 
 package player.phonograph.model.metadata
 
-import player.phonograph.R
 import androidx.annotation.IntDef
 
 interface MusicMetadata : Metadata {
@@ -35,11 +34,11 @@ sealed interface MusicMetadataKey : Metadata.Key
  * definitions from JAudioTagger
  */
 @Suppress("SpellCheckingInspection")
-enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetadataKey {
+enum class ConventionalMusicMetadataKey : MusicMetadataKey {
     ACOUSTID_FINGERPRINT,
     ACOUSTID_ID,
-    ALBUM(R.string.label_album),
-    ALBUM_ARTIST(R.string.label_album_artist),
+    ALBUM,
+    ALBUM_ARTIST,
     ALBUM_ARTIST_SORT,
     ALBUM_ARTISTS,
     ALBUM_ARTISTS_SORT,
@@ -47,7 +46,7 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     AMAZON_ID,
     ARRANGER,
     ARRANGER_SORT,
-    ARTIST(R.string.label_artist),
+    ARTIST,
     ARTISTS,
     ARTISTS_SORT,
     ARTIST_SORT,
@@ -58,8 +57,8 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     CLASSICAL_NICKNAME,
     CHOIR,
     CHOIR_SORT,
-    COMMENT(R.string.label_comment),
-    COMPOSER(R.string.label_composer),
+    COMMENT,
+    COMPOSER,
     COMPOSER_SORT,
     CONDUCTOR,
     CONDUCTOR_SORT,
@@ -70,16 +69,16 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     CUSTOM3,
     CUSTOM4,
     CUSTOM5,
-    DISC_NO(R.string.label_disk_number),
+    DISC_NO,
     DISC_SUBTITLE,
-    DISC_TOTAL(R.string.label_disk_number_total),
+    DISC_TOTAL,
     DJMIXER,
     ENCODER,
     ENGINEER,
     ENSEMBLE,
     ENSEMBLE_SORT,
     FBPM,
-    GENRE(R.string.label_genre),
+    GENRE,
     GROUPING,
     INVOLVED_PERSON,
     ISRC,
@@ -89,8 +88,8 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     ITUNES_GROUPING,
     KEY,
     LANGUAGE,
-    LYRICIST(R.string.label_lyricist),
-    LYRICS(R.string.label_lyrics),
+    LYRICIST,
+    LYRICS,
     MEDIA,
     MIXER,
     MOOD,
@@ -160,7 +159,7 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     PRODUCER,
     QUALITY,
     RANKING,
-    RATING(R.string.label_rating),
+    RATING,
     RECORD_LABEL,
     REMIXER,
     SCRIPT,
@@ -169,12 +168,12 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     TAGS,
     TEMPO,
     TIMBRE,
-    TITLE(R.string.label_title),
+    TITLE,
     TITLE_SORT,
     TITLE_MOVEMENT,
     TONALITY,
-    TRACK(R.string.label_track),
-    TRACK_TOTAL(R.string.label_track_total),
+    TRACK,
+    TRACK_TOTAL,
     URL_DISCOGS_ARTIST_SITE,
     URL_DISCOGS_RELEASE_SITE,
     URL_LYRICS_SITE,
@@ -184,7 +183,7 @@ enum class ConventionalMusicMetadataKey(override val res: Int = 0) : MusicMetada
     URL_WIKIPEDIA_RELEASE_SITE,
     WORK,
     WORK_TYPE,
-    YEAR(R.string.label_year);
+    YEAR;
 
     companion object {
         val WELL_KNOWN: List<ConventionalMusicMetadataKey>

@@ -22,6 +22,7 @@ import player.phonograph.model.sort.SortRef
 import player.phonograph.model.ui.ItemLayoutStyle
 import player.phonograph.ui.actions.ActionMenuProviders
 import player.phonograph.ui.actions.ClickActionProviders
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.text.albumCountString
 import player.phonograph.util.text.dateTextShortText
 import player.phonograph.util.text.infoString
@@ -209,8 +210,10 @@ abstract class PlaylistBasicDisplayPresenter(
 
     override fun getItemID(item: Playlist): Long = item.id
     override fun getDisplayTitle(context: Context, item: Playlist): CharSequence = item.name
-    override fun getDescription(context: Context, item: Playlist): CharSequence = item.location.text(context)
-    override fun getSecondaryText(context: Context, item: Playlist): CharSequence = item.location.text(context)
+    override fun getDescription(context: Context, item: Playlist): CharSequence =
+        Texts.playlist(context.resources, item.location)
+    override fun getSecondaryText(context: Context, item: Playlist): CharSequence =
+        Texts.playlist(context.resources, item.location)
 
     override val clickActionProvider: ClickActionProviders.ClickActionProvider<Playlist> =
         ClickActionProviders.PlaylistClickActionProvider()

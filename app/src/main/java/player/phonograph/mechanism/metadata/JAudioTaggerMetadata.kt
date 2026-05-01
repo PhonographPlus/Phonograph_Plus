@@ -23,7 +23,7 @@ data class JAudioTaggerMetadata(
     override val textTagFields: Map<ConventionalMusicMetadataKey, Metadata.Field>
         get() = genericTagFields.filter { it.value is Metadata.TextualField }
 
-    data class Key(val id: String, override val res: Int = 0) : TagMetadataKey
+    data class Key(val id: String) : TagMetadataKey
 
     data class Field(
         val id: String,

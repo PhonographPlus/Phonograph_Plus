@@ -4,8 +4,6 @@
 
 package player.phonograph.model.metadata
 
-import player.phonograph.R
-
 data class FileProperties(
     val fileName: String,
     val filePath: String,
@@ -16,47 +14,31 @@ data class FileProperties(
 
     override fun get(key: Metadata.Key): Metadata.Field? =
         when (key) {
-            is Keys.Name         -> Metadata.TextualField(fileName)
-            is Keys.Path         -> Metadata.TextualField(fileName)
-            is Keys.Size         -> Metadata.NumericField(fileSize, NOTATION_DATA_SIZE)
-            is Keys.DateAdded    -> Metadata.NumericField(dateAdded, NOTATION_TIMESTAMP)
-            is Keys.DateModified -> Metadata.NumericField(dateModified, NOTATION_TIMESTAMP)
-            else                 -> null
+            Key.Name         -> Metadata.TextualField(fileName)
+            Key.Path         -> Metadata.TextualField(fileName)
+            Key.Size         -> Metadata.NumericField(fileSize, NOTATION_DATA_SIZE)
+            Key.DateAdded    -> Metadata.NumericField(dateAdded, NOTATION_TIMESTAMP)
+            Key.DateModified -> Metadata.NumericField(dateModified, NOTATION_TIMESTAMP)
+            else             -> null
         }
 
-    override fun contains(key: Metadata.Key): Boolean = key is FilePropertiesKey
+    override fun contains(key: Metadata.Key): Boolean = key is Key
 
     override val fields: List<Metadata.Entry>
         get() = listOf(
-            Metadata.PlainEntry(Keys.Name, Metadata.TextualField(fileName)),
-            Metadata.PlainEntry(Keys.Path, Metadata.TextualField(fileName)),
-            Metadata.PlainEntry(Keys.Size, Metadata.NumericField(fileSize, NOTATION_TIMESTAMP)),
-            Metadata.PlainEntry(Keys.DateAdded, Metadata.NumericField(dateAdded, NOTATION_TIMESTAMP)),
-            Metadata.PlainEntry(Keys.DateModified, Metadata.NumericField(dateModified, NOTATION_TIMESTAMP)),
+            Metadata.PlainEntry(Key.Name, Metadata.TextualField(fileName)),
+            Metadata.PlainEntry(Key.Path, Metadata.TextualField(fileName)),
+            Metadata.PlainEntry(Key.Size, Metadata.NumericField(fileSize, NOTATION_TIMESTAMP)),
+            Metadata.PlainEntry(Key.DateAdded, Metadata.NumericField(dateAdded, NOTATION_TIMESTAMP)),
+            Metadata.PlainEntry(Key.DateModified, Metadata.NumericField(dateModified, NOTATION_TIMESTAMP)),
         )
 
-    sealed interface FilePropertiesKey : Metadata.Key
-
-    object Keys {
-
-        data object Name : FilePropertiesKey {
-            override val res: Int = R.string.label_file_name
-        }
-
-        data object Path : FilePropertiesKey {
-            override val res: Int = R.string.label_file_path
-        }
-
-        data object Size : FilePropertiesKey {
-            override val res: Int = R.string.label_file_size
-        }
-
-        data object DateAdded : FilePropertiesKey {
-            override val res: Int = R.string.label_created_at
-        }
-
-        data object DateModified : FilePropertiesKey {
-            override val res: Int = R.string.label_last_modified_at
-        }
+    enum class Key : Metadata.Key {
+        Name,
+        Path,
+        Size,
+        DateAdded,
+        DateModified,
+        ;
     }
 }

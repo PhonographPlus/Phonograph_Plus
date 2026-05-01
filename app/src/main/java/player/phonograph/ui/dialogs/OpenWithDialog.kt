@@ -21,6 +21,7 @@ import player.phonograph.ui.compose.ComposeViewDialogFragment
 import player.phonograph.ui.compose.PhonographTheme
 import player.phonograph.ui.compose.components.ModeRadioBox
 import player.phonograph.ui.modules.main.MainActivity
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.theme.accentColoredButtonStyle
 import androidx.activity.ComponentActivity
 import androidx.compose.foundation.layout.Column
@@ -202,7 +203,7 @@ private fun OpenWithOptions(
     for (id in modes) {
         ModeRadioBox(
             mode = id,
-            name = SongClickMode.modeName(context.resources, id),
+            name = Texts.songClickMode(context.resources, id),
             selectedMode = currentMode,
             setCurrentMode = setCurrentMode
         )

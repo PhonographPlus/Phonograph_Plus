@@ -16,6 +16,7 @@ import player.phonograph.ui.modules.tag.components.InsertNewButton
 import player.phonograph.ui.modules.tag.components.ReadonlyTagItem
 import player.phonograph.ui.modules.tag.util.ErrorMessage
 import player.phonograph.ui.modules.tag.util.display
+import player.phonograph.ui.resource.Texts
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -26,8 +27,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import android.content.Context
@@ -78,7 +81,8 @@ private fun GenericTagItem(
     onEdit: (Context, Edit) -> Unit,
 ) {
     val context = LocalContext.current
-    val tagName = if (key.res > 0) stringResource(key.res) else key.name
+    val resources = LocalResources.current
+    val tagName = remember(key) { Texts.metadataTagKey(resources, key) }
 
     Box(modifier = Modifier.fillMaxWidth()) {
         if (editable) {

@@ -20,6 +20,8 @@ import player.phonograph.service.ServiceComponent
 import player.phonograph.settings.Keys
 import player.phonograph.settings.SettingObserver
 import player.phonograph.ui.modules.main.MainActivity
+import player.phonograph.ui.resource.Icons
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.permissions.checkNotificationPermission
 import player.phonograph.util.theme.getTintedDrawable
 import player.phonograph.util.theme.secondaryTextColorOn
@@ -280,9 +282,9 @@ class PlayingNotificationManager : ServiceComponent {
         private fun processActions(action: NotificationAction?, status: MusicServiceStatus): Action {
             return if (action != null)
                 Action(
-                    action.icon(status),
-                    service.getString(action.stringRes),
-                    buildPlaybackPendingIntent(action.action)
+                    Icons.notificationAction(action, status),
+                    Texts.notificationAction(service.resources, action),
+                    buildPlaybackPendingIntent(action.command)
                 )
             else {
                 Action(R.drawable.ic_notification, null, null)
@@ -502,7 +504,7 @@ class PlayingNotificationManager : ServiceComponent {
                 val notificationAction = actions.getOrNull(i) ?: continue
                 setOnClickPendingIntent(
                     actionPlaceholders[i],
-                    buildPlaybackPendingIntent(notificationAction.action)
+                    buildPlaybackPendingIntent(notificationAction.command)
                 )
             }
         }
@@ -540,7 +542,7 @@ class PlayingNotificationManager : ServiceComponent {
          */
         private fun icon(action: NotificationAction, status: MusicServiceStatus, backgroundColor: Int): Bitmap {
             val color = textColorOn(service, backgroundColor)
-            val drawable = service.getTintedDrawable(action.icon(status), color)!!
+            val drawable = service.getTintedDrawable(Icons.notificationAction(action, status), color)!!
             return drawable.toBitmap(
                 width = (drawable.intrinsicWidth * 1.5f).toInt(),
                 height = (drawable.intrinsicHeight * 1.5f).toInt()

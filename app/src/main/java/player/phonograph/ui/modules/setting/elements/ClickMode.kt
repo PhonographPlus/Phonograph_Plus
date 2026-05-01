@@ -8,6 +8,7 @@ import player.phonograph.R
 import player.phonograph.model.SongClickMode
 import player.phonograph.ui.compose.components.FlagCheckBox
 import player.phonograph.ui.compose.components.ModeRadioBox
+import player.phonograph.ui.resource.Texts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -32,7 +33,7 @@ fun ClickModeSettings(
         for (id in SongClickMode.allModes) {
             ModeRadioBox(
                 mode = id,
-                name = SongClickMode.modeName(LocalResources.current, id),
+                name = Texts.songClickMode(LocalResources.current, id),
                 selectedMode = currentMode,
                 setCurrentMode = setCurrentMode
             )

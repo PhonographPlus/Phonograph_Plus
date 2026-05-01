@@ -4,9 +4,6 @@
 
 package player.phonograph.model
 
-import player.phonograph.R
-import android.content.res.Resources
-
 @Suppress("MemberVisibilityCanBePrivate")
 object SongClickMode {
 
@@ -69,23 +66,6 @@ object SongClickMode {
             QUEUE_SWITCH_TO_POSITION,
             QUEUE_SHUFFLE,
         )
-    }
-
-
-    fun modeName(resources: Resources, id: Int): String {
-        return when (id) {
-            SONG_PLAY_NEXT            -> resources.getString(R.string.mode_song_play_next)
-            SONG_PLAY_NOW             -> resources.getString(R.string.mode_song_play_now)
-            SONG_APPEND_QUEUE         -> resources.getString(R.string.mode_song_append_queue)
-            SONG_SINGLE_PLAY          -> resources.getString(R.string.mode_song_single_play)
-            QUEUE_PLAY_NEXT           -> resources.getString(R.string.mode_queue_play_next)
-            QUEUE_PLAY_NOW            -> resources.getString(R.string.mode_queue_play_now)
-            QUEUE_APPEND_QUEUE        -> resources.getString(R.string.mode_queue_append_queue)
-            QUEUE_SWITCH_TO_BEGINNING -> resources.getString(R.string.mode_queue_switch_to_beginning)
-            QUEUE_SWITCH_TO_POSITION  -> resources.getString(R.string.mode_queue_switch_to_position)
-            QUEUE_SHUFFLE             -> resources.getString(R.string.mode_queue_shuffle)
-            else                      -> "UNKNOWN MODE $id"
-        }
     }
 
 

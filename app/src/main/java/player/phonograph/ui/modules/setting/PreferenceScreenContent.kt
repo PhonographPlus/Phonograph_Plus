@@ -13,7 +13,6 @@ import player.phonograph.model.repo.SYNC_MODE_EXCLUDE_GENRES
 import player.phonograph.model.repo.SYNC_MODE_STANDARD
 import player.phonograph.model.time.Duration
 import player.phonograph.model.time.TimeIntervalCalculationMode
-import player.phonograph.model.time.displayText
 import player.phonograph.repo.loader.Albums
 import player.phonograph.repo.loader.Artists
 import player.phonograph.repo.loader.Genres
@@ -30,6 +29,7 @@ import player.phonograph.ui.modules.setting.dialog.ImageSourceConfigDialog
 import player.phonograph.ui.modules.setting.dialog.LastAddedPlaylistIntervalDialog
 import player.phonograph.ui.modules.setting.dialog.PathFilterEditorDialog
 import player.phonograph.ui.modules.setting.dialog.TagSeparatorsEditorDialog
+import player.phonograph.ui.resource.Texts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -149,12 +149,7 @@ fun PreferenceScreenContent() {
                         setting[Keys._lastAddedCutOffDuration].data
                             .let(Duration.Companion::from)
                     if (calculationMode != null && duration != null)
-                        resources.getString(
-                            R.string.time_interval_text,
-                            calculationMode.displayText(resources),
-                            duration.value,
-                            duration.unit.displayText(resources)
-                        )
+                        Texts.duration(resources, duration, calculationMode)
                     else
                         resources.getString(R.string._default)
                 },

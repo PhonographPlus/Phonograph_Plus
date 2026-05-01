@@ -27,6 +27,7 @@ import player.phonograph.model.playlist.Playlist
 import player.phonograph.model.ui.UIMode
 import player.phonograph.repo.loader.Playlists
 import player.phonograph.ui.modules.panel.AbsSlidingMusicPanelActivity
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.observe
 import player.phonograph.util.text.readableDuration
 import player.phonograph.util.theme.ThemeSettingsDelegate.accentColor
@@ -271,7 +272,7 @@ class PlaylistDetailActivity :
 
             val playlist = viewModel.playlist
             nameText.text = playlist.name
-            pathText.text = playlist.location.text(this@PlaylistDetailActivity)
+            pathText.text = Texts.playlist(resources, playlist.location)
 
 
             with(searchBox) {

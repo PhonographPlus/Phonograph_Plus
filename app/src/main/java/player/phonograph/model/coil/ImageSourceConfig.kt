@@ -15,14 +15,14 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class ImageSourceConfig(
     @SerialName("sources") val sources: List<Item>,
-    @SerialName("version") val version: Int = 0
+    @SerialName("version") val version: Int = 0,
 ) : Parcelable {
     @Keep
     @Parcelize
     @Serializable
     data class Item(
         @SerialName("key") val key: String,
-        @SerialName("enabled") val enabled: Boolean
+        @SerialName("enabled") val enabled: Boolean,
     ) : Parcelable {
         val imageSource: ImageSource
             get() = ImageSource.fromKey(key)
@@ -36,10 +36,10 @@ data class ImageSourceConfig(
         val DEFAULT: ImageSourceConfig
             get() = ImageSourceConfig(
                 listOf(
-                    Item(ImageSource.IMAGE_SOURCE_MEDIA_STORE, true),
-                    Item(ImageSource.IMAGE_SOURCE_MEDIA_METADATA_RETRIEVER, true),
-                    Item(ImageSource.IMAGE_SOURCE_J_AUDIO_TAGGER, true),
-                    Item(ImageSource.IMAGE_SOURCE_EXTERNAL_FILE, true),
+                    Item(IMAGE_SOURCE_MEDIA_STORE, true),
+                    Item(IMAGE_SOURCE_MEDIA_METADATA_RETRIEVER, true),
+                    Item(IMAGE_SOURCE_J_AUDIO_TAGGER, true),
+                    Item(IMAGE_SOURCE_EXTERNAL_FILE, true),
                 ), VERSION
             )
 

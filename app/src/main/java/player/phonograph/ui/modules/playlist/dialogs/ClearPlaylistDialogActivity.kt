@@ -22,6 +22,7 @@ import player.phonograph.ui.compose.components.ListItem
 import player.phonograph.ui.modules.playlist.dialogs.ClearPlaylistDialogActivity.ClearPlaylistViewModel.State.ConfirmToDelete
 import player.phonograph.ui.modules.playlist.dialogs.ClearPlaylistDialogActivity.ClearPlaylistViewModel.State.PreparedToDelete
 import player.phonograph.ui.modules.playlist.dialogs.ClearPlaylistDialogActivity.ClearPlaylistViewModel.State.Success
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.permissions.StoragePermissionChecker
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -47,6 +48,7 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.BlendModeColorFilter
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -194,7 +196,7 @@ class ClearPlaylistDialogActivity : DialogActivity(),
 
     @Composable
     private fun DisplayPlaylist(playlists: List<Playlist>) {
-        val context = LocalContext.current
+        val resources = LocalResources.current
         val hint = remember(playlists) {
             resources.getQuantityString(
                 R.plurals.item_playlists,
@@ -207,7 +209,7 @@ class ClearPlaylistDialogActivity : DialogActivity(),
             for (playlist in playlists) {
                 item(playlist.id) {
                     val name = remember { playlist.name }
-                    val description = remember { playlist.location.text(context).toString() }
+                    val description = remember { Texts.playlist(resources, playlist.location) }
                     ListItem(
                         modifier = Modifier,
                         title = name,

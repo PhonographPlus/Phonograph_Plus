@@ -4,7 +4,12 @@
 
 package player.phonograph.ui.modules.search
 
-import player.phonograph.model.pages.Pages
+import player.phonograph.model.pages.HomePage
+import player.phonograph.model.pages.PAGE_ALBUM
+import player.phonograph.model.pages.PAGE_ARTIST
+import player.phonograph.model.pages.PAGE_GENRE
+import player.phonograph.model.pages.PAGE_PLAYLIST
+import player.phonograph.model.pages.PAGE_SONG
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
@@ -26,14 +31,14 @@ class SearchResultPageAdapter(
         }
     }
 
-    fun lookup(name: String?): Int =
+    fun lookup(@HomePage name: String?): Int =
         when (name) {
-            Pages.SONG     -> SearchType.SONGS.ordinal
-            Pages.ALBUM    -> SearchType.ALBUMS.ordinal
-            Pages.ARTIST   -> SearchType.ARTISTS.ordinal
-            Pages.PLAYLIST -> SearchType.PLAYLISTS.ordinal
-            Pages.GENRE    -> SearchType.GENRES.ordinal
-            else           -> 0
+            PAGE_SONG     -> SearchType.SONGS.ordinal
+            PAGE_ALBUM    -> SearchType.ALBUMS.ordinal
+            PAGE_ARTIST   -> SearchType.ARTISTS.ordinal
+            PAGE_PLAYLIST -> SearchType.PLAYLISTS.ordinal
+            PAGE_GENRE    -> SearchType.GENRES.ordinal
+            else          -> 0
         }
 
 }

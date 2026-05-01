@@ -8,44 +8,26 @@ import okio.Path.Companion.toOkioPath
 import okio.buffer
 import okio.source
 import player.phonograph.BuildConfig
-import player.phonograph.R
 import player.phonograph.foundation.error.warning
 import player.phonograph.model.backup.BackupItem
 import player.phonograph.model.backup.BackupItemExecutor
 import player.phonograph.model.backup.BackupManifestFile
 import player.phonograph.model.backup.BackupType
-import player.phonograph.repo.database.DatabaseConstants.FAVORITE_DB
 import player.phonograph.repo.database.DatabaseConstants.HISTORY_DB
 import player.phonograph.repo.database.DatabaseConstants.MUSIC_PLAYBACK_STATE_DB
 import player.phonograph.repo.database.DatabaseConstants.SONG_PLAY_COUNT_DB
 import player.phonograph.repo.room.MusicDatabase
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.text.currentTimestamp
 import player.phonograph.util.zip.ZipUtil.extractDirectory
 import player.phonograph.util.zip.ZipUtil.zipDirectory
 import android.content.Context
-import android.content.res.Resources
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.InputStream
 import java.io.OutputStream
 
 object Backup {
-
-    fun displayName(backupItem: BackupItem, resources: Resources): CharSequence = with(resources) {
-        when (backupItem) {
-            BackupItem.Settings              -> getString(R.string.action_settings)
-            BackupItem.PathFilter            -> getString(R.string.path_filter)
-            BackupItem.Favorites             -> getString(R.string.playlist_favorites)
-            BackupItem.PlayingQueues         -> getString(R.string.label_playing_queue)
-            BackupItem.InternalPlaylists     -> getString(R.string.label_database_playlists)
-            BackupItem.MainDatabase          -> "[${getString(R.string.label_databases)}] ${getString(R.string.pref_header_library)}"
-            BackupItem.FavoriteDatabase      -> "[${getString(R.string.label_databases)}] ${getString(R.string.playlist_favorites)}"
-            BackupItem.PathFilterDatabase    -> "[${getString(R.string.label_databases)}] ${getString(R.string.path_filter)}"
-            BackupItem.HistoryDatabase       -> "[${getString(R.string.label_databases)}] ${getString(R.string.playlist_history)}"
-            BackupItem.SongPlayCountDatabase -> "[${getString(R.string.label_databases)}] ${getString(R.string.playlist_my_top_tracks)}"
-            BackupItem.PlayingQueuesDatabase -> "[${getString(R.string.label_databases)}] ${getString(R.string.label_playing_queue)}"
-        }
-    }
 
     private fun executor(item: BackupItem): BackupItemExecutor? = when (item) {
         BackupItem.Settings              -> SettingsDataBackupItemExecutor
@@ -164,7 +146,7 @@ object Backup {
             // filter
             val selected = manifest.files.filterKeys { it in content }
             for ((item, relativePath) in selected) {
-                onUpdateProgress(displayName(item, context.resources))
+                onUpdateProgress(Texts.backupItem(context.resources, item))
                 File(tmpDir, relativePath).source().use { source ->
 
                     val executor = executor(item)

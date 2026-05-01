@@ -6,16 +6,20 @@ package player.phonograph.coil.retriever
 
 import coil.request.Parameters
 import player.phonograph.coil.PARAMETERS_KEY_IMAGE_SOURCE_CONFIG
+import player.phonograph.model.coil.IMAGE_SOURCE_EXTERNAL_FILE
+import player.phonograph.model.coil.IMAGE_SOURCE_J_AUDIO_TAGGER
+import player.phonograph.model.coil.IMAGE_SOURCE_MEDIA_METADATA_RETRIEVER
+import player.phonograph.model.coil.IMAGE_SOURCE_MEDIA_STORE
 import player.phonograph.model.coil.ImageSource
 import player.phonograph.model.coil.ImageSourceConfig
 import android.util.Log
 
 private fun ImageSource.retriever(): ImageRetriever = when (key) {
-    ImageSource.IMAGE_SOURCE_MEDIA_STORE              -> ImageRetrievers.MediaStoreRetriever()
-    ImageSource.IMAGE_SOURCE_MEDIA_METADATA_RETRIEVER -> ImageRetrievers.MediaMetadataRetriever()
-    ImageSource.IMAGE_SOURCE_J_AUDIO_TAGGER           -> ImageRetrievers.JAudioTaggerRetriever()
-    ImageSource.IMAGE_SOURCE_EXTERNAL_FILE            -> ImageRetrievers.ExternalFileRetriever()
-    else                                              -> throw IllegalArgumentException("Unknown ImageSource: $key")
+    IMAGE_SOURCE_MEDIA_STORE              -> ImageRetrievers.MediaStoreRetriever()
+    IMAGE_SOURCE_MEDIA_METADATA_RETRIEVER -> ImageRetrievers.MediaMetadataRetriever()
+    IMAGE_SOURCE_J_AUDIO_TAGGER           -> ImageRetrievers.JAudioTaggerRetriever()
+    IMAGE_SOURCE_EXTERNAL_FILE            -> ImageRetrievers.ExternalFileRetriever()
+    else                                  -> throw IllegalArgumentException("Unknown ImageSource: $key")
 }
 
 fun Parameters.retrievers(): List<ImageRetriever> =

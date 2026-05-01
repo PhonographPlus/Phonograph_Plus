@@ -12,6 +12,7 @@ import player.phonograph.settings.Keys
 import player.phonograph.settings.Setting
 import player.phonograph.ui.adapter.SortableListAdapter
 import player.phonograph.ui.compose.components.ActionItem
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.theme.textColorPrimary
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -115,7 +116,7 @@ class NotificationActionsConfigDialog : AbsSettingsDialog() {
         override fun fetchDataset(): SortableList<NotificationActionsConfig.Item> {
             val result: MutableList<SortableList.Item<NotificationActionsConfig.Item>> =
                 actionConfig.actions.map { SortableList.Item(it, true) }.toMutableList()
-            for (action in NotificationAction.ALL_ACTIONS) {
+            for (action in NotificationAction.ALL) {
                 if (result.firstOrNull { it.content.key == action.key } == null) {
                     result.add(
                         SortableList.Item(
@@ -136,7 +137,7 @@ class NotificationActionsConfigDialog : AbsSettingsDialog() {
         override fun onBindContentView(contentView: View, holder: ViewHolder) {
             val binding = ItemRightCheckboxBinding.bind(contentView)
             val item = dataset[holder.bindingAdapterPosition].content
-            binding.textview.text = contentView.resources.getText(item.notificationAction.stringRes)
+            binding.textview.text = Texts.notificationAction(contentView.resources, item.notificationAction)
             binding.textview.setTextColor(textColorPrimary(contentView.context))
             binding.checkbox.isChecked = item.displayInCompat
             binding.checkbox.setOnClickListener { view ->

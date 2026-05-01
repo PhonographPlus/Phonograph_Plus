@@ -4,15 +4,6 @@
 
 package player.phonograph.util
 
-private const val SID_SHIFT = Long.SIZE_BITS - Byte.SIZE_BITS // 56
-private const val SID_MASK_LOWER = (1L shl SID_SHIFT) - 1 // 0x00ff_ffff_ffff_ffff
-/**
- * Generate a sectioned 64-bits ID: the lowers 56 bits is cut from [id], the higher 8 bits is shifted from [section]
- */
-fun produceSectionedId(id: Long, section: Int): Long {
-    return (id and SID_MASK_LOWER) + (section shl SID_SHIFT)
-}
-
 private const val ID_SHIFT: Int = 36 // 4 * 9
 private const val ID_EMBED_SIZE: Int = 20 // 4 * 5
 private const val ID_MASK_CUT: Long = (1L shl (ID_EMBED_SIZE)) - 1 // 0x000_0000_000f_ffff

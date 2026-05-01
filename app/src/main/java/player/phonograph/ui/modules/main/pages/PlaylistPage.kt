@@ -6,9 +6,9 @@ package player.phonograph.ui.modules.main.pages
 
 import player.phonograph.R
 import player.phonograph.mechanism.event.EventHub
+import player.phonograph.mechanism.playlist.DynamicPlaylists
 import player.phonograph.mechanism.playlist.PlaylistSongsActions
 import player.phonograph.model.Song
-import player.phonograph.model.playlist.DynamicPlaylists
 import player.phonograph.model.playlist.Playlist
 import player.phonograph.model.sort.SortMode
 import player.phonograph.model.ui.ItemLayoutStyle
@@ -20,6 +20,7 @@ import player.phonograph.ui.adapter.DisplayAdapter
 import player.phonograph.ui.adapter.DisplayPresenter
 import player.phonograph.ui.adapter.PlaylistBasicDisplayPresenter
 import player.phonograph.ui.modules.playlist.dialogs.CreatePlaylistDialogActivity
+import player.phonograph.ui.resource.Layouts
 import player.phonograph.util.theme.ThemeSettingsDelegate.accentColor
 import player.phonograph.util.theme.ThemeSettingsDelegate.primaryColor
 import player.phonograph.util.theme.themeCardBackgroundColor
@@ -117,7 +118,8 @@ class PlaylistPage : AbsDisplayPage<Playlist, DisplayAdapter<Playlist>>() {
             if (dataset[position].isVirtual()) DYNAMIC_PLAYLIST else DEFAULT_PLAYLIST
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayViewHolder<Playlist> {
-            val view = LayoutInflater.from(activity).inflate(ItemLayoutStyle.LIST_SINGLE_ROW.layout(), parent, false)
+            val itemLayout = Layouts.itemLayoutStyle(ItemLayoutStyle.LIST_SINGLE_ROW)
+            val view = LayoutInflater.from(activity).inflate(itemLayout, parent, false)
             return if (viewType == DYNAMIC_PLAYLIST) SmartPlaylistViewHolder(view) else CommonPlaylistViewHolder(view)
         }
 

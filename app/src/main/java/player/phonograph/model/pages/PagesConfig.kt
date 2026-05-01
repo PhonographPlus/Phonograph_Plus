@@ -20,13 +20,13 @@ data class PagesConfig(
     companion object {
         val DEFAULT_CONFIG = PagesConfig(
             mutableListOf(
-                Pages.SONG,
-                Pages.FOLDER,
-                Pages.FILES,
-                Pages.PLAYLIST,
-                Pages.ALBUM,
-                Pages.ARTIST,
-                Pages.GENRE,
+                PAGE_SONG,
+                PAGE_FOLDER,
+                PAGE_FILES,
+                PAGE_PLAYLIST,
+                PAGE_ALBUM,
+                PAGE_ARTIST,
+                PAGE_GENRE,
             )
         )
     }

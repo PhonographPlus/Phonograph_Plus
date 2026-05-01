@@ -4,8 +4,6 @@
 
 package player.phonograph.model.metadata
 
-import androidx.annotation.StringRes
-
 interface Metadata {
 
     operator fun get(key: Key): Field?
@@ -14,10 +12,7 @@ interface Metadata {
 
     val fields: List<Entry>
 
-    interface Key {
-        @get:StringRes
-        val res: Int
-    }
+    interface Key
 
     interface Field {
         val data: Any

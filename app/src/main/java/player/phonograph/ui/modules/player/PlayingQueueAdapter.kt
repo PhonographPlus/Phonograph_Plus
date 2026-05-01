@@ -12,6 +12,7 @@ import player.phonograph.ui.actions.ClickActionProviders
 import player.phonograph.ui.adapter.DisplayPresenter
 import player.phonograph.ui.adapter.DraggableDisplayAdapter
 import player.phonograph.ui.adapter.MultiSelectionController
+import player.phonograph.ui.resource.Layouts
 import player.phonograph.util.produceSafeId
 import player.phonograph.util.text.infoString
 import player.phonograph.util.ui.hitTest
@@ -46,7 +47,8 @@ class PlayingQueueAdapter(activity: FragmentActivity) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DraggableViewHolder<Song> {
-        val view = LayoutInflater.from(activity).inflate(ItemLayoutStyle.LIST.layout(), parent, false)
+        val itemLayout = Layouts.itemLayoutStyle(ItemLayoutStyle.LIST)
+        val view = LayoutInflater.from(activity).inflate(itemLayout, parent, false)
         return PlayingQueueViewHolder(view)
     }
 

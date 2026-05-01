@@ -11,6 +11,7 @@ import player.phonograph.settings.Keys
 import player.phonograph.settings.Setting
 import player.phonograph.ui.adapter.SortableListAdapter
 import player.phonograph.ui.compose.components.ActionItem
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.theme.textColorPrimary
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -128,8 +129,10 @@ class ImageSourceConfigDialog : AbsSettingsDialog() {
         }
 
         override fun onBindContentView(contentView: View, holder: ViewHolder) {
-            require(contentView is TextView) { "Receive ${contentView.javaClass.name}" }
-            contentView.text = dataset[holder.bindingAdapterPosition].content.displayString(contentView.context)
+            val item = dataset[holder.bindingAdapterPosition].content
+            if (contentView is TextView) {
+                contentView.text = Texts.imageSource(contentView.resources, item.key)
+            }
         }
 
         val currentConfig: ImageSourceConfig

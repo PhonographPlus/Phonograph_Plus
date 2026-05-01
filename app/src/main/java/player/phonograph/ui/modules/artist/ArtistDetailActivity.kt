@@ -29,6 +29,7 @@ import player.phonograph.ui.adapter.DisplayPresenter
 import player.phonograph.ui.adapter.MultiSelectionController
 import player.phonograph.ui.adapter.SongBasicDisplayPresenter
 import player.phonograph.ui.modules.panel.AbsSlidingMusicPanelActivity
+import player.phonograph.ui.resource.Layouts
 import player.phonograph.util.component.GetContentDelegate
 import player.phonograph.util.component.IGetContentRequester
 import player.phonograph.util.observe
@@ -249,7 +250,8 @@ class ArtistDetailActivity : AbsSlidingMusicPanelActivity(), PaletteColorProvide
 
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DisplayViewHolder<Album> {
-            val view = LayoutInflater.from(activity).inflate(ItemLayoutStyle.from(viewType).layout(), parent, false)
+            val itemLayout = Layouts.itemLayoutStyle(ItemLayoutStyle.from(viewType))
+            val view = LayoutInflater.from(activity).inflate(itemLayout, parent, false)
             return HorizontalAlbumViewHolder(view)
         }
 

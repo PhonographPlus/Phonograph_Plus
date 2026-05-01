@@ -12,7 +12,14 @@ import com.google.android.material.tabs.TabLayoutMediator
 import player.phonograph.R
 import player.phonograph.databinding.FragmentHomeBinding
 import player.phonograph.foundation.error.warning
-import player.phonograph.model.pages.Pages
+import player.phonograph.model.pages.HomePage
+import player.phonograph.model.pages.PAGE_ALBUM
+import player.phonograph.model.pages.PAGE_ARTIST
+import player.phonograph.model.pages.PAGE_FILES
+import player.phonograph.model.pages.PAGE_FOLDER
+import player.phonograph.model.pages.PAGE_GENRE
+import player.phonograph.model.pages.PAGE_PLAYLIST
+import player.phonograph.model.pages.PAGE_SONG
 import player.phonograph.model.pages.PagesConfig
 import player.phonograph.ui.modules.main.pages.AbsPage
 import player.phonograph.ui.modules.main.pages.AlbumPage
@@ -25,6 +32,7 @@ import player.phonograph.ui.modules.main.pages.PlaylistPage
 import player.phonograph.ui.modules.main.pages.SongPage
 import player.phonograph.ui.modules.popup.ListOptionsPopup
 import player.phonograph.ui.modules.search.SearchActivity
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.debug
 import player.phonograph.util.logMetrics
 import player.phonograph.util.observe
@@ -191,7 +199,7 @@ class MainFragment : Fragment() {
 
         // TabLayout
         TabLayoutMediator(binding.tabs, binding.pager) { tab: TabLayout.Tab, index: Int ->
-            tab.text = Pages.getDisplayName(homeTabConfig[index], requireContext())
+            tab.text = Texts.page(resources, homeTabConfig[index])
         }.attach()
         binding.tabs.visibility = if (homePagerAdapter.itemCount == 1) View.GONE else View.VISIBLE
     }
@@ -254,16 +262,16 @@ class MainFragment : Fragment() {
                 current[position] = WeakReference(fragment)
             } // registry
 
-        private fun createPage(type: String): AbsPage {
+        private fun createPage(@HomePage type: String): AbsPage {
             return when (type) {
-                Pages.SONG     -> SongPage()
-                Pages.ALBUM    -> AlbumPage()
-                Pages.ARTIST   -> ArtistPage()
-                Pages.PLAYLIST -> PlaylistPage()
-                Pages.GENRE    -> GenrePage()
-                Pages.FOLDER   -> FoldersPage()
-                Pages.FILES    -> FilesPage()
-                else           -> EmptyPage()
+                PAGE_SONG     -> SongPage()
+                PAGE_ALBUM    -> AlbumPage()
+                PAGE_ARTIST   -> ArtistPage()
+                PAGE_PLAYLIST -> PlaylistPage()
+                PAGE_GENRE    -> GenrePage()
+                PAGE_FOLDER   -> FoldersPage()
+                PAGE_FILES    -> FilesPage()
+                else          -> EmptyPage()
             }
         }
     }

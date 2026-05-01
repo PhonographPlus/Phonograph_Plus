@@ -20,6 +20,7 @@ import player.phonograph.ui.modules.tag.components.InsertNewButton
 import player.phonograph.ui.modules.tag.components.ReadonlyTagItem
 import player.phonograph.ui.modules.tag.util.ErrorMessage
 import player.phonograph.ui.modules.tag.util.display
+import player.phonograph.ui.resource.Texts
 import player.phonograph.util.text.dateTimeTextPrecise
 import player.phonograph.util.text.getFileSizeString
 import androidx.compose.foundation.layout.Arrangement
@@ -42,6 +43,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -87,15 +89,18 @@ fun TagBrowserScreen(viewModel: TagBrowserActivityViewModel) {
 @Composable
 private fun AudioProperties(metadata: AudioMetadata) {
     val context = LocalContext.current
-    val fileProperties = metadata.fileProperties
-    val audioProperties = metadata.audioProperties
+    val resources = LocalResources.current
+    val fileProperties = remember(metadata) { metadata.fileProperties }
+    val audioProperties = remember(metadata) { metadata.audioProperties }
     ReadonlyTagItem(stringResource(R.string.label_file_name), fileProperties.fileName)
     ReadonlyTagItem(stringResource(R.string.label_file_path), fileProperties.filePath)
     ReadonlyTagItem(stringResource(R.string.label_file_size), getFileSizeString(fileProperties.fileSize))
     ReadonlyTagItem(stringResource(R.string.label_created_at), dateTimeTextPrecise(fileProperties.dateAdded))
     ReadonlyTagItem(stringResource(R.string.label_last_modified_at), dateTimeTextPrecise(fileProperties.dateModified))
     for (audioProperty in audioProperties.fields) {
-        ReadonlyTagItem(stringResource(audioProperty.key.res), value = display(context, audioProperty.field))
+        val keyName = remember(audioProperty.key) { Texts.metadataKey(resources, audioProperty.key) }
+        val keyValue = remember(audioProperty.field) { display(context, audioProperty.field) }
+        ReadonlyTagItem(keyName, keyValue)
     }
 }
 
@@ -165,8 +170,9 @@ private fun GenericTagItem(
     onEdit: (Context, Edit) -> Unit,
 ) {
     val context = LocalContext.current
-    val tagName = if (key.res > 0) stringResource(key.res) else key.name
-    val tagValue = display(context, field)
+    val resources = LocalResources.current
+    val tagName = remember(key) { Texts.metadataTagKey(resources, key) }
+    val tagValue = remember(field) { display(context, field) }
 
     Box(modifier = Modifier.fillMaxWidth()) {
         if (editable) {
