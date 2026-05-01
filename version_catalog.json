@@ -2,6 +2,30 @@
     "versions": [
         {
             "channel": "preview",
+            "versionName": "2.0.0-dev2",
+            "versionCode": 1123,
+            "date": 1777560000,
+            "link": [
+                {
+                    "name": "Github Release (Website)",
+                    "uri": "https://github.com/chr56/Phonograph_Plus/releases/tag/preview_2.0.0-dev2"
+                },
+                {
+                    "name": "Github Release Modern Variant APK (File Download Link)",
+                    "uri": "https://github.com/chr56/Phonograph_Plus/releases/download/preview_2.0.0-dev2/PhonographPlus_2.0.0-dev2_ModernPreviewRelease.apk"
+                },
+                {
+                    "name": "Github Release Legacy Variant APK (File Download Link)",
+                    "uri": "https://github.com/chr56/Phonograph_Plus/releases/download/preview_2.0.0-dev2/PhonographPlus_2.0.0-dev2_LegacyPreviewRelease.apk"
+                }
+            ],
+            "releaseNote": {
+                "zh-cn": "<ol><li>修复 因路径查找失败导致的恢复播放列表、播放文件夹或外部文件时崩溃的问题</li><li>修复 部分设备上切回前台后偶尔全部标签页消失</li><li>开发 将图片缓存机制迁移至新数据库</li><li>开发 更新依赖</li></ol>",
+                "en": "<ol><li>Fix: crash when restoring playlists and playing folders or external files, due to path lookup failures</li><li>Fix: occasionally all tabs disappearing when returning to the foreground on some devices</li><li>Development: migrate image cache mechanism to new database</li><li>Development: update dependencies</li></ol>"
+            }
+        },
+        {
+            "channel": "preview",
             "versionName": "2.0.0-dev1",
             "versionCode": 1122,
             "date": 1776959000,
