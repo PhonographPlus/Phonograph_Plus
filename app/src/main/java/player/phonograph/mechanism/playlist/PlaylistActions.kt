@@ -17,8 +17,7 @@ import player.phonograph.model.playlist.PlaylistCreator
 import player.phonograph.model.playlist.PlaylistCreator.Companion.RESULT_ERROR
 import player.phonograph.model.playlist.PlaylistDeleter
 import player.phonograph.model.playlist.VirtualPlaylistLocation
-import player.phonograph.repo.database.store.HistoryStore
-import player.phonograph.repo.database.store.SongPlayCountStore
+import player.phonograph.repo.database.domain.DynamicTracks
 import player.phonograph.repo.loader.FavoriteSongs
 import player.phonograph.repo.mediastore.MediaStorePlaylists
 import player.phonograph.repo.mediastore.MediaStorePlaylistsActions
@@ -84,8 +83,8 @@ object PlaylistActions {
             val location = playlist.location
             if (location !is VirtualPlaylistLocation) return false
             return when (location.type) {
-                PLAYLIST_TYPE_HISTORY      -> HistoryStore.get().clear()
-                PLAYLIST_TYPE_MY_TOP_TRACK -> SongPlayCountStore.get().clear()
+                PLAYLIST_TYPE_HISTORY      -> DynamicTracks.RecentTracks.clear()
+                PLAYLIST_TYPE_MY_TOP_TRACK -> DynamicTracks.TopTracks.clear()
                 PLAYLIST_TYPE_FAVORITE     -> FavoriteSongs.clearAll(context)
                 else                       -> false
             }
@@ -212,8 +211,8 @@ object PlaylistActions {
 
         private suspend fun deleteVirtual(context: Context, location: VirtualPlaylistLocation): Boolean =
             when (location.type) {
-                PLAYLIST_TYPE_HISTORY      -> HistoryStore.get().clear()
-                PLAYLIST_TYPE_MY_TOP_TRACK -> SongPlayCountStore.get().clear()
+                PLAYLIST_TYPE_HISTORY      -> DynamicTracks.RecentTracks.clear()
+                PLAYLIST_TYPE_MY_TOP_TRACK -> DynamicTracks.TopTracks.clear()
                 PLAYLIST_TYPE_FAVORITE     -> FavoriteSongs.clearAll(context)
                 else                       -> false
             }

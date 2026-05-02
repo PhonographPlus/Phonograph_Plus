@@ -22,9 +22,7 @@ import player.phonograph.model.playlist.PlaylistProcessor
 import player.phonograph.model.playlist.PlaylistReader
 import player.phonograph.model.playlist.PlaylistWriter
 import player.phonograph.model.playlist.VirtualPlaylistLocation
-import player.phonograph.repo.database.loaders.RecentlyPlayedTracksLoader
-import player.phonograph.repo.database.loaders.TopTracksLoader
-import player.phonograph.repo.database.store.SongPlayCountStore
+import player.phonograph.repo.database.domain.DynamicTracks
 import player.phonograph.repo.loader.FavoriteSongs
 import player.phonograph.repo.loader.Songs
 import player.phonograph.repo.mediastore.MediaStorePlaylists
@@ -162,8 +160,7 @@ private data object FavoriteSongsPlaylistProcessor : PlaylistReader, PlaylistWri
 }
 
 private data object HistoryPlaylistProcessor : PlaylistReader {
-    override suspend fun allSongs(context: Context): List<Song> =
-        RecentlyPlayedTracksLoader.get().tracks(context)
+    override suspend fun allSongs(context: Context): List<Song> = DynamicTracks.RecentTracks.all(context)
 
     override suspend fun containsSong(context: Context, songId: Long): Boolean = false //todo
 
@@ -182,14 +179,11 @@ private data object LastAddedPlaylistProcessor : PlaylistReader {
 private data object MyTopTracksPlaylistProcessor : PlaylistReader {
 
 
-    override suspend fun allSongs(context: Context): List<Song> =
-        TopTracksLoader.get().tracks(context)
+    override suspend fun allSongs(context: Context): List<Song> = DynamicTracks.TopTracks.all(context)
 
     override suspend fun containsSong(context: Context, songId: Long): Boolean = false // todo
 
-    override suspend fun refresh(context: Context) {
-        SongPlayCountStore.get().reCalculateScore(context)
-    }
+    override suspend fun refresh(context: Context) = DynamicTracks.TopTracks.refresh(context)
 
 }
 

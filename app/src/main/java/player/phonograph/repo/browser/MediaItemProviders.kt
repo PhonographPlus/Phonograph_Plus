@@ -15,8 +15,7 @@ import player.phonograph.model.PlayRequest
 import player.phonograph.model.QueueSong
 import player.phonograph.model.Song
 import player.phonograph.model.playlist.Playlist
-import player.phonograph.repo.database.loaders.RecentlyPlayedTracksLoader
-import player.phonograph.repo.database.loaders.TopTracksLoader
+import player.phonograph.repo.database.domain.DynamicTracks
 import player.phonograph.repo.loader.Albums
 import player.phonograph.repo.loader.Artists
 import player.phonograph.repo.loader.FavoriteSongs
@@ -386,7 +385,7 @@ object MediaItemProviders {
     }
 
     private object TopTracksProvider : AbsMediaItemProvider() {
-        private suspend fun fetch(context: Context): List<Song> = TopTracksLoader.get().tracks(context)
+        private suspend fun fetch(context: Context): List<Song> = DynamicTracks.TopTracks.all(context)
 
         override suspend fun browser(context: Context): List<MediaItem> =
             withPlayAllItems(
@@ -396,7 +395,7 @@ object MediaItemProviders {
             )
 
         override suspend fun play(context: Context): PlayRequest =
-            PlayRequest.SongsRequest(TopTracksLoader.get().tracks(context), 0)
+            PlayRequest.SongsRequest(DynamicTracks.TopTracks.all(context), 0)
     }
 
     private object RecentAddedProvider : AbsMediaItemProvider() {
@@ -420,7 +419,7 @@ object MediaItemProviders {
 
 
     private object RecentlyPlayedProvider : AbsMediaItemProvider() {
-        private suspend fun fetch(context: Context): List<Song> = RecentlyPlayedTracksLoader.get().tracks(context)
+        private suspend fun fetch(context: Context): List<Song> = DynamicTracks.RecentTracks.all(context)
 
         override suspend fun browser(context: Context): List<MediaItem> =
             withPlayAllItems(
@@ -430,7 +429,7 @@ object MediaItemProviders {
             )
 
         override suspend fun play(context: Context): PlayRequest =
-            PlayRequest.SongsRequest(RecentlyPlayedTracksLoader.get().tracks(context), 0)
+            PlayRequest.SongsRequest(DynamicTracks.RecentTracks.all(context), 0)
     }
 
 

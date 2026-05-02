@@ -5,8 +5,10 @@
 package player.phonograph.service.util
 
 import player.phonograph.model.Song
-import player.phonograph.repo.database.store.SongPlayCountStore
-import java.util.Locale
+import player.phonograph.repo.database.domain.DynamicTracks
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 /**
  * @author Abou Zeid (kabouzeid)
@@ -32,11 +34,13 @@ class SongPlayCountHelper {
         }
     }
 
-    fun checkForBumpingPlayCount(songPlayCountStore: SongPlayCountStore) {
+    fun checkForBumpingPlayCount(coroutineScope: CoroutineScope) {
         synchronized(this) {
             val song = songMonitored
             if (song != null && stopWatch.elapsedTime > song.duration * 0.5) {
-                songPlayCountStore.bumpPlayCount(song.id)
+                coroutineScope.launch(Dispatchers.IO) {
+                    DynamicTracks.TopTracks.bump(song.id)
+                }
             }
         }
     }
@@ -116,6 +120,6 @@ class SongPlayCountHelper {
                 }
             }
 
-        override fun toString(): String = String.format(Locale.getDefault(), "%d millis", elapsedTime)
+        override fun toString(): String = "$elapsedTime millis"
     }
 }
