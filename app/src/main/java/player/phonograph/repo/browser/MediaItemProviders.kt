@@ -18,7 +18,7 @@ import player.phonograph.model.playlist.Playlist
 import player.phonograph.repo.database.domain.DynamicTracks
 import player.phonograph.repo.loader.Albums
 import player.phonograph.repo.loader.Artists
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import player.phonograph.repo.loader.Genres
 import player.phonograph.repo.loader.Songs
 import player.phonograph.repo.mediastore.MediaStorePlaylists
@@ -371,7 +371,7 @@ object MediaItemProviders {
 
 
     private object FavoriteSongsProvider : AbsMediaItemProvider() {
-        private suspend fun fetch(context: Context): List<Song> = FavoriteSongs.all(context)
+        private suspend fun fetch(context: Context): List<Song> = FavoriteTracks.all(context)
 
         override suspend fun browser(context: Context): List<MediaItem> =
             withPlayAllItems(
@@ -381,7 +381,7 @@ object MediaItemProviders {
             )
 
         override suspend fun play(context: Context): PlayRequest =
-            PlayRequest.SongsRequest(FavoriteSongs.all(context), 0)
+            PlayRequest.SongsRequest(FavoriteTracks.all(context), 0)
     }
 
     private object TopTracksProvider : AbsMediaItemProvider() {

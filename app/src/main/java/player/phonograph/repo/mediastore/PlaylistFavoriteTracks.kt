@@ -11,13 +11,13 @@ import player.phonograph.mechanism.playlist.PlaylistSongsActions
 import player.phonograph.model.Song
 import player.phonograph.model.playlist.FilePlaylistLocation
 import player.phonograph.model.playlist.Playlist
-import player.phonograph.model.repo.loader.IFavoriteSongs
+import player.phonograph.model.repo.loader.IFavoriteTracks
 import player.phonograph.util.concurrent.coroutineToast
 import android.content.Context
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
-class PlaylistFavoriteSongs : IFavoriteSongs {
+class PlaylistFavoriteTracks : IFavoriteTracks {
 
     override suspend fun all(context: Context): List<Song> {
         val favoritesPlaylist = getFavoritesPlaylist(context)

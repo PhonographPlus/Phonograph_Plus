@@ -13,7 +13,7 @@ import player.phonograph.model.playlist.PLAYLIST_TYPE_LAST_ADDED
 import player.phonograph.model.playlist.Playlist
 import player.phonograph.model.playlist.VirtualPlaylistLocation
 import player.phonograph.model.ui.UIMode
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import player.phonograph.ui.actions.DetailToolbarMenuProviders
 import player.phonograph.ui.modules.setting.dialog.LastAddedPlaylistIntervalDialog
 import player.phonograph.util.fragmentActivity
@@ -98,7 +98,7 @@ class PlaylistToolbarMenuProvider(
                                                 .setMessage(R.string.action_clean_missing_items)
                                                 .setPositiveButton(getString(android.R.string.ok)) { dialog, _ ->
                                                     context.lifecycleScope.launch {
-                                                        FavoriteSongs.cleanMissing(context)
+                                                        FavoriteTracks.cleanMissing(context)
                                                     }
                                                     dialog.dismiss()
                                                 }

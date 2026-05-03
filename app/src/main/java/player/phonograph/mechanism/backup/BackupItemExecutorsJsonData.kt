@@ -22,7 +22,7 @@ import player.phonograph.model.backup.ExportedPlaylist
 import player.phonograph.model.backup.ExportedSetting
 import player.phonograph.model.backup.ExportedSong
 import player.phonograph.model.playlist.Playlist
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import player.phonograph.repo.loader.PinedPlaylists
 import player.phonograph.repo.loader.Songs
 import player.phonograph.repo.mediastore.MediaStorePlaylists
@@ -37,7 +37,6 @@ import player.phonograph.settings.SettingsDataSerializer
 import player.phonograph.util.gitRevisionHash
 import androidx.datastore.preferences.core.edit
 import android.content.Context
-import kotlin.LazyThreadSafetyMode.NONE
 import kotlinx.coroutines.flow.first
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.SerializationException
@@ -190,7 +189,7 @@ object PlayingQueuesDataBackupItemExecutor : JsonDataBackupItemExecutor() {
 object FavoritesDataBackupItemExecutor : JsonDataBackupItemExecutor() {
     override suspend fun export(context: Context): Buffer? {
 
-        val songs = FavoriteSongs.all(context).map(::exportSong)
+        val songs = FavoriteTracks.all(context).map(::exportSong)
 
         val playlists = PinedPlaylists.all(context).map(::exportPlaylist)
 
@@ -204,8 +203,8 @@ object FavoritesDataBackupItemExecutor : JsonDataBackupItemExecutor() {
         return if (imported != null) {
 
             val favoriteSongs = imported.favoriteSong.mapNotNull { importSong(it, context) }
-            FavoriteSongs.clearAll(context)
-            FavoriteSongs.add(context, favoriteSongs.asReversed())
+            FavoriteTracks.clearAll(context)
+            FavoriteTracks.add(context, favoriteSongs.asReversed())
             EventHub.sendEvent(context, EventHub.EVENT_FAVORITES_CHANGED)
 
             val pinedPlaylists = imported.pinedPlaylist.mapNotNull { importPlaylist(it, context) }

@@ -5,7 +5,7 @@
 package player.phonograph.ui.modules.player
 
 import player.phonograph.model.Song
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import android.content.Context
@@ -24,7 +24,7 @@ class PlayerFragmentViewModel : ViewModel() {
         loadFavoriteStateJob?.cancel()
         if (song != null && song.id > 0) {
             loadFavoriteStateJob = viewModelScope.launch {
-                _favoriteState.emit(song to FavoriteSongs.isFavorite(context, song))
+                _favoriteState.emit(song to FavoriteTracks.isFavorite(context, song))
             }
         }
     }

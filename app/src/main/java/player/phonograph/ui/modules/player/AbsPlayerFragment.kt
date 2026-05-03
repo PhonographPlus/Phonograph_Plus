@@ -16,7 +16,7 @@ import player.phonograph.model.ui.NowPlayingScreenStyle
 import player.phonograph.model.ui.PlayerBaseStyle
 import player.phonograph.model.ui.PlayerControllerStyle
 import player.phonograph.model.ui.UnarySlidingUpPanelProvider
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import player.phonograph.service.MusicPlayerRemote
 import player.phonograph.ui.NavigationUtil
 import player.phonograph.ui.dialogs.LyricsDialog
@@ -426,7 +426,7 @@ private fun buildPlayerToolbar(
             onClick {
                 val song = queueViewModel.currentSong.value
                 if (song != null) lifecycle.coroutineScope.launch(Dispatchers.IO) {
-                    FavoriteSongs.toggleState(context, song)
+                    FavoriteTracks.toggleState(context, song)
                     EventHub.sendEvent(context, EventHub.EVENT_FAVORITES_CHANGED)
                 }
                 true

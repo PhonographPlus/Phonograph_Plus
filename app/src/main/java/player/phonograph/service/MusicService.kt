@@ -15,7 +15,7 @@ import player.phonograph.model.lyrics.LrcLyrics
 import player.phonograph.model.service.*
 import player.phonograph.repo.browser.MediaBrowserDelegate
 import player.phonograph.repo.database.domain.DynamicTracks
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import player.phonograph.service.notification.CoverLoader
 import player.phonograph.service.notification.PlayingNotificationManager
 import player.phonograph.service.notification.PlayingNotificationManager.Companion.VERSION_SET_COVER_USING_METADATA
@@ -155,7 +155,7 @@ class MusicService : MediaBrowserServiceCompat(),
 
 
     private fun toggleFavorite(song: Song?): Boolean {
-        return if (song != null) runBlocking { FavoriteSongs.toggleState(this@MusicService, song) } else false
+        return if (song != null) runBlocking { FavoriteTracks.toggleState(this@MusicService, song) } else false
     }
 
 

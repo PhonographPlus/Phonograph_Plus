@@ -5,14 +5,14 @@
 package player.phonograph.repo.room.domain
 
 import player.phonograph.model.Song
-import player.phonograph.model.repo.loader.IFavoriteSongs
+import player.phonograph.model.repo.loader.IFavoriteTracks
 import player.phonograph.repo.room.converter.EntityConverter
 import player.phonograph.repo.room.dao.MediaStoreSongDao
 import player.phonograph.repo.room.entity.FavoriteSongEntity
 import androidx.room.withTransaction
 import android.content.Context
 
-object RoomFavoriteSongs : RoomLoader(), IFavoriteSongs {
+object RoomFavoriteTracks : RoomLoader(), IFavoriteTracks {
 
     override suspend fun all(context: Context): List<Song> {
         val entities = db.FavoritesSongsDao().all()

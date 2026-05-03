@@ -5,12 +5,11 @@
 package player.phonograph.ui.modules.setting
 
 import player.phonograph.R
-import player.phonograph.repo.loader.FavoriteSongs
+import player.phonograph.repo.loader.FavoriteTracks
 import player.phonograph.settings.Keys
 import player.phonograph.ui.compose.ExperimentalContentThemeOverride
 import player.phonograph.ui.modules.setting.components.BooleanPreference
 import player.phonograph.ui.modules.setting.components.SettingsGroup
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -44,7 +43,7 @@ fun PreferenceScreenAdvanced() {
                 key = Keys.useLegacyFavoritePlaylistImpl,
                 titleRes = R.string.pref_title_use_legacy_favorite_playlist_impl,
                 summaryRes = R.string.pref_summary_use_legacy_favorite_playlist_impl,
-                onValueChanged = { FavoriteSongs.recreate(context) }
+                onValueChanged = { FavoriteTracks.recreate(context) }
             )
             BooleanPreference(
                 key = Keys.useLegacyListFilesImpl,
