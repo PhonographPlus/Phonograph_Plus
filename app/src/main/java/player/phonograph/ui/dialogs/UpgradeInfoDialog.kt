@@ -8,12 +8,10 @@ import com.vanpra.composematerialdialogs.MaterialDialog
 import com.vanpra.composematerialdialogs.rememberMaterialDialogState
 import com.vanpra.composematerialdialogs.title
 import player.phonograph.R
-import player.phonograph.UpdateConfig.CHANNEL_NAME
-import player.phonograph.UpdateConfig.DOMAIN_GITHUB
-import player.phonograph.UpdateConfig.DOMAIN_TG_LINK
-import player.phonograph.UpdateConfig.GITHUB_REPO
 import player.phonograph.foundation.compat.parcelable
-import player.phonograph.mechanism.canAccessGitHub
+import player.phonograph.mechanism.UpdateChecker.GITHUB_RELEASE_URL
+import player.phonograph.mechanism.UpdateChecker.TG_CHANNEL
+import player.phonograph.mechanism.UpdateChecker.canAccessGitHub
 import player.phonograph.model.version.Version
 import player.phonograph.model.version.VersionCatalog
 import player.phonograph.settings.Keys
@@ -306,6 +304,3 @@ private fun Context.open(uri: String) {
         }
     )
 }
-
-private const val GITHUB_RELEASE_URL = "$DOMAIN_GITHUB/$GITHUB_REPO/releases"
-private const val TG_CHANNEL = "$DOMAIN_TG_LINK/$CHANNEL_NAME"

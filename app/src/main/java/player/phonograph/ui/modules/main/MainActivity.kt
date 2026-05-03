@@ -14,7 +14,7 @@ import player.phonograph.databinding.ActivityMainDrawerBinding
 import player.phonograph.foundation.compat.parcelableExtra
 import player.phonograph.foundation.error.warning
 import player.phonograph.mechanism.PhonographShortcutManager
-import player.phonograph.mechanism.Update
+import player.phonograph.mechanism.UpdateChecker
 import player.phonograph.model.Song
 import player.phonograph.model.pages.PagesConfig
 import player.phonograph.model.version.VersionCatalog
@@ -229,9 +229,9 @@ class MainActivity : AbsSlidingMusicPanelActivity(),
             return
         }
         lifecycleScope.launch(SupervisorJob()) {
-            Update.checkUpdate { versionCatalog: VersionCatalog, upgradable: Boolean ->
+            UpdateChecker.checkUpdate { versionCatalog: VersionCatalog, upgradable: Boolean ->
                 if (upgradable) {
-                    Update.sendNotification(
+                    UpdateChecker.sendNotification(
                         this@MainActivity,
                         versionCatalog,
                         launchingIntent(

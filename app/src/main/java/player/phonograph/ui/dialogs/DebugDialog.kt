@@ -6,7 +6,7 @@ package player.phonograph.ui.dialogs
 
 import player.phonograph.App
 import player.phonograph.foundation.error.warning
-import player.phonograph.mechanism.Update
+import player.phonograph.mechanism.UpdateChecker
 import player.phonograph.model.Song
 import player.phonograph.model.version.VersionCatalog
 import player.phonograph.repo.mediastore.MediaStoreSongsActions
@@ -63,7 +63,7 @@ class DebugDialog : DialogFragment() {
         },
         "Check for updates (Dialog)" to {
             CoroutineScope(Dispatchers.Unconfined).launch {
-                Update.checkUpdate(true) { versionCatalog: VersionCatalog, upgradable: Boolean ->
+                UpdateChecker.checkUpdate(true) { versionCatalog: VersionCatalog, upgradable: Boolean ->
                     try {
                         UpgradeInfoDialog.create(versionCatalog)
                             .show(hostActivity.get()?.supportFragmentManager!!, "DebugDialog")
@@ -78,8 +78,8 @@ class DebugDialog : DialogFragment() {
         },
         "Check for updates (Notification)" to {
             CoroutineScope(Dispatchers.Unconfined).launch {
-                Update.checkUpdate(true) { versionCatalog: VersionCatalog, upgradable: Boolean ->
-                    Update.sendNotification(
+                UpdateChecker.checkUpdate(true) { versionCatalog: VersionCatalog, upgradable: Boolean ->
+                    UpdateChecker.sendNotification(
                         App.instance,
                         versionCatalog,
                         MainActivity.launchingIntent(

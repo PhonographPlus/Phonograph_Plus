@@ -5,7 +5,7 @@ import player.phonograph.App
 import player.phonograph.R
 import player.phonograph.databinding.ActivityAboutBinding
 import player.phonograph.foundation.error.warning
-import player.phonograph.mechanism.Update
+import player.phonograph.mechanism.UpdateChecker
 import player.phonograph.model.version.VersionCatalog
 import player.phonograph.settings.Keys
 import player.phonograph.settings.Setting
@@ -182,7 +182,7 @@ class AboutActivity : ToolbarActivity(), View.OnClickListener {
 
             checkUpgrade                                                     -> {
                 lifecycleScope.launch(Dispatchers.Unconfined) {
-                    Update.checkUpdate { versionCatalog: VersionCatalog, upgradable: Boolean ->
+                    UpdateChecker.checkUpdate { versionCatalog: VersionCatalog, upgradable: Boolean ->
                         if (upgradable) {
                             UpgradeInfoDialog.create(versionCatalog).show(supportFragmentManager, "UPGRADE_DIALOG")
                             val ignored = Setting(App.instance)[Keys.ignoreUpgradeDate].data
