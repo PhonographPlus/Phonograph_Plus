@@ -13,10 +13,10 @@ import player.phonograph.model.backup.BackupItem
 import player.phonograph.model.backup.BackupItemExecutor
 import player.phonograph.model.backup.BackupManifestFile
 import player.phonograph.model.backup.BackupType
-import player.phonograph.repo.database.DatabaseConstants.HISTORY_DB
-import player.phonograph.repo.database.DatabaseConstants.MUSIC_PLAYBACK_STATE_DB
-import player.phonograph.repo.database.DatabaseConstants.SONG_PLAY_COUNT_DB
+import player.phonograph.repo.database.store.HistoryStore.Companion.HISTORY_DB
+import player.phonograph.repo.database.store.SongPlayCountStore.Companion.SONG_PLAY_COUNT_DB
 import player.phonograph.repo.room.MusicDatabase
+import player.phonograph.service.queue.MusicPlaybackQueueStore.Companion.MUSIC_PLAYBACK_STATE_DB
 import player.phonograph.ui.resource.Texts
 import player.phonograph.util.text.currentTimestamp
 import player.phonograph.util.zip.ZipUtil.extractDirectory

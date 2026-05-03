@@ -8,7 +8,6 @@ import org.koin.core.context.GlobalContext
 import player.phonograph.R
 import player.phonograph.foundation.error.warning
 import player.phonograph.foundation.notification.Notifications
-import player.phonograph.repo.database.DatabaseConstants
 import player.phonograph.repo.database.store.SongPlayCountStore.SongPlayCountColumns.Companion.ID
 import player.phonograph.repo.database.store.SongPlayCountStore.SongPlayCountColumns.Companion.LAST_UPDATED_WEEK_INDEX
 import player.phonograph.repo.database.store.SongPlayCountStore.SongPlayCountColumns.Companion.NAME
@@ -27,7 +26,7 @@ import kotlin.math.min
  * the top played tracks as well as the playlist images
  */
 class SongPlayCountStore(val context: Context) :
-        SQLiteOpenHelper(context, DatabaseConstants.SONG_PLAY_COUNT_DB, null, VERSION), Cleanable {
+        SQLiteOpenHelper(context, SONG_PLAY_COUNT_DB, null, VERSION), Cleanable {
 
     /** number of weeks since epoch time **/
     private val mCurrentWeekNumber: Int get() = (System.currentTimeMillis() / ONE_WEEK_IN_MS).toInt()
@@ -400,6 +399,7 @@ class SongPlayCountStore(val context: Context) :
         private fun getColumnIndexForWeek(week: Int): Int = 1 + week // ID, followed by the weeks columns
 
         private const val VERSION = 3
+        const val SONG_PLAY_COUNT_DB = "song_play_count.db"
 
         /** how many weeks worth of playback to track */
         private const val NUM_WEEKS = 52

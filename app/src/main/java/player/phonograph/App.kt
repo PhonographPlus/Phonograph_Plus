@@ -17,6 +17,8 @@ import player.phonograph.foundation.Reboot
 import player.phonograph.foundation.error.crashActivity
 import player.phonograph.foundation.error.startCrashActivity
 import player.phonograph.foundation.localization.ContextLocaleDelegate
+import player.phonograph.repo.moduleLoaders
+import player.phonograph.service.moduleQueue
 import player.phonograph.service.queue.QueueManager
 import player.phonograph.ui.moduleViewModels
 import player.phonograph.ui.modules.auxiliary.CrashActivity
@@ -100,7 +102,7 @@ class App : Application(), ImageLoaderFactory {
             androidLogger(if (DEBUG) Level.DEBUG else Level.WARNING)
             androidContext(this@App)
 
-            modules(moduleStatus, moduleLoaders, moduleViewModels)
+            modules(moduleQueue, moduleLoaders, moduleViewModels)
         }
 
         // Color

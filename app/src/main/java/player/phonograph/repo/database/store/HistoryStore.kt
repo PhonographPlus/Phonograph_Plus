@@ -4,7 +4,6 @@
 package player.phonograph.repo.database.store
 
 import org.koin.core.context.GlobalContext
-import player.phonograph.repo.database.DatabaseConstants.HISTORY_DB
 import player.phonograph.repo.database.store.HistoryStore.RecentStoreColumns.Companion.ID
 import player.phonograph.repo.database.store.HistoryStore.RecentStoreColumns.Companion.NAME
 import player.phonograph.repo.database.store.HistoryStore.RecentStoreColumns.Companion.TIME_PLAYED
@@ -116,5 +115,6 @@ class HistoryStore(context: Context) :
 
         private const val MAX_ITEMS_IN_DB = 150
         private const val VERSION = 1
+        const val HISTORY_DB = "history.db"
     }
 }

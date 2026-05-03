@@ -6,7 +6,6 @@ package player.phonograph.service.queue
 import player.phonograph.foundation.error.warning
 import player.phonograph.foundation.mediastore.intoSongs
 import player.phonograph.model.Song
-import player.phonograph.repo.database.DatabaseConstants
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -21,7 +20,7 @@ import android.provider.MediaStore.Audio.AudioColumns
  * This keeps track of the music playback and history state of the playback service
  */
 class MusicPlaybackQueueStore(val context: Context) : SQLiteOpenHelper(
-    context, DatabaseConstants.MUSIC_PLAYBACK_STATE_DB, null, VERSION
+    context, MUSIC_PLAYBACK_STATE_DB, null, VERSION
 ) {
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -148,5 +147,7 @@ class MusicPlaybackQueueStore(val context: Context) : SQLiteOpenHelper(
 
         private const val VERSION = 6
 
+
+        const val MUSIC_PLAYBACK_STATE_DB = "music_playback_state.db"
     }
 }
